@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const form = reactive({
   username: '',
@@ -7,7 +10,9 @@ const form = reactive({
 })
 
 function onSubmit() {
-  console.log(form)
+  localStorage.setItem('username', form.username)
+  const lastPath = localStorage.getItem('lastPath') ?? '/'
+  router.replace(lastPath)
 }
 </script>
 <template>
@@ -16,6 +21,7 @@ function onSubmit() {
     <div class="mb-4">
       <label for="username" class="block text-gray-600">Username</label>
       <input
+        v-model="form.username"
         type="text"
         id="username"
         name="username"
@@ -27,6 +33,7 @@ function onSubmit() {
     <div class="mb-4">
       <label for="password" class="block text-gray-600">Password</label>
       <input
+        v-model="form.password"
         type="password"
         id="password"
         name="password"

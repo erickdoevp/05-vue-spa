@@ -3,18 +3,28 @@
     <!-- Header -->
     <header class="flex items-center h-14 px-4 border-b border-gray-300 sm:h-16 md:px-6 lg:px-8">
       <div></div>
-      <nav class="ml-auto space-x-4 flex items-center h-10 sm:space-x-6">
-        <RouterLink :to="{ name: 'home' }"> Home </RouterLink>
-        <RouterLink to="/features"> Features </RouterLink>
-        <RouterLink to="/pricing"> Pricing </RouterLink>
-        <RouterLink to="/contact"> Contact </RouterLink>
+      <nav class="flex-col ml-auto space-x-4 flex h-10 sm:space-x-6 items-end">
+        <div class="space-x-4">
+          <RouterLink :to="{ name: 'home' }"> Home </RouterLink>
+          <RouterLink to="/features" active-class="underline font-semi-bold"> Features </RouterLink>
+          <RouterLink to="/pricing"> Pricing </RouterLink>
+          <RouterLink to="/contact"> Contact </RouterLink>
+          <RouterLink to="/pokemon-detail/1"> Poke Detail </RouterLink>
+        </div>
+        <div class="space-x-4">
+          <RouterLink :to="{ name: 'login' }"> Login </RouterLink>
+        </div>
       </nav>
     </header>
     <!-- Fin Header -->
 
     <!-- Main -->
     <main class="flex-1 flex items-center justify-center">
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </RouterView>
     </main>
     <!-- Fin Main -->
 
